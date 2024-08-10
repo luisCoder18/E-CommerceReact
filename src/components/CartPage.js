@@ -1,26 +1,50 @@
+// src/components/CartPage.js
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeItem, clearCart } from '../features/cartSlice';
 
 const CartPage = () => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+
+  const handleRemoveItem = (item) => {
+    dispatch(removeItem(item));
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+
   return (
-    <div className="p-6 bg-gray-900 min-h-screen">
-      <h1 className="text-5xl font-bold text-white mb-4">Cart Page</h1>
-      <p className="text-xl text-gray-300 mb-8">Review your cart before proceeding to checkout.</p>
-
-      {/* Simulated Cart Items */}
-      <div className="bg-gray-800 text-white p-4 rounded-lg mb-4">
-        <h3 className="text-xl font-semibold mb-2">Cart Item 1</h3>
-        <p>$29.99</p>
-      </div>
-      <div className="bg-gray-800 text-white p-4 rounded-lg mb-4">
-        <h3 className="text-xl font-semibold mb-2">Cart Item 2</h3>
-        <p>$49.99</p>
-      </div>
-
-      <div className="bg-gray-800 text-white p-4 rounded-lg">
-        <h3 className="text-xl font-semibold mb-2">Total</h3>
-        <p>$79.98</p>
-        <button className="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500">Proceed to Checkout</button>
-      </div>
+    <div className="p-6 bg-gray-900 min-h-screen text-white">
+      <h1 className="text-4xl font-bold mb-6">Carrito de Compras</h1>
+      {cartItems.length === 0 ? (
+        <p>Tu carrito está vacío.</p>
+      ) : (
+        <div>
+          <button
+            onClick={handleClearCart}
+            className="bg-red-500 text-white p-2 rounded-lg mb-4 hover:bg-red-600"
+          >
+            Vaciar Carrito
+          </button>
+          <ul>
+            {cartItems.map((item) => (
+              <li key={item.id} className="bg-gray-800 p-4 rounded-lg mb-4">
+                <h2 className="text-2xl font-bold mb-2">{item.name}</h2>
+                <p className="text-lg mb-2">{item.description}</p>
+                <p className="text-xl font-semibold mb-2">{item.price}</p>
+                <button
+                  onClick={() => handleRemoveItem(item)}
+                  className="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600"
+                >
+                  Eliminar
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
