@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Aplica el color de fondo global */
-body {
-  background-color: #f0f0f0; /* Color de fondo más claro */
-  color: #333333; /* Color del texto */
-}
+/* En tu archivo CSS principal */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";

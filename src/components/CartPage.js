@@ -1,4 +1,3 @@
-// src/components/CartPage.js
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem, clearCart } from '../features/cartSlice';
@@ -13,6 +12,10 @@ const CartPage = () => {
 
   const handleClearCart = () => {
     dispatch(clearCart());
+  };
+
+  const getTotalPrice = () => {
+    return cartItems.reduce((total, item) => total + parseFloat(item.price.replace('$', '')), 0).toFixed(2);
   };
 
   return (
@@ -43,6 +46,9 @@ const CartPage = () => {
               </li>
             ))}
           </ul>
+          <div className="mt-4 text-xl font-bold">
+            Total: ${getTotalPrice()}
+          </div>
         </div>
       )}
     </div>

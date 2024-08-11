@@ -5,6 +5,7 @@ import ProductPage from './components/ProductPage';
 import CartPage from './components/CartPage';
 import CheckoutPage from './components/CheckoutPage';
 import Navbar from './components/Navbar';
+import ProductDetail from './components/ProductDetail';
 
 const App = () => {
   return (
@@ -12,10 +13,10 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/products" element={<ProductPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/products/:id" element={<ProductPage />} /> {/* Agregado para detalles */}
       </Routes>
     </Router>
   );
